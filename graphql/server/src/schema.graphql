@@ -1,0 +1,148 @@
+#Type definitions (Schema)
+#--Scalar Types (single values): String, Boolean, Int, Float, ID
+#--Custom Types (collections value): Array, Objects
+
+#Imports (unsupported by GraphQL so has to be hidden behind a comment)
+# import UserOrderByInput, PostOrderByInput, CommentOrderByInput from "./generated/prisma.graphql"
+
+type Query {
+  allUsers(
+    query: String
+    first: Int
+    skip: Int
+    after: String
+    orderBy: UserOrderByInput
+  ): [User!]!
+  allPosts(
+    query: String
+    first: Int
+    skip: Int
+    after: String
+    orderBy: PostOrderByInput
+  ): [Post!]!
+  allComments(
+    first: Int
+    skip: Int
+    after: String
+    orderBy: CommentOrderByInput
+  ): [Comment!]!
+  user: User!
+  userPosts(
+    query: String
+    first: Int
+    skip: Int
+    after: String
+    orderBy: PostOrderByInput
+  ): [Post!]!
+  post(id: ID!): Post!
+}
+
+type Mutation {
+  createUser(userData: CreateUserInput!): AuthPayload!
+  updateUser(userData: UpdateUserInput!): User!
+  deleteUser: User!
+  loginUser(loginData: LoginInput!): AuthPayload!
+  createPost(postData: CreatePostInput!): Post!
+  updatePost(id: ID!, postData: UpdatePostInput!): Post!
+  deletePost(id: ID!): Post!
+  createComment(commentData: CreateCommentInput!): Comment!
+  updateComment(id: ID!, commentData: UpdateCommentInput!): Comment!
+  deleteComment(id: ID!): Comment!
+}
+
+type Subscription {
+  #count: Int!
+  comments(postID: ID!): CommentSubscriptionPayload!
+  posts: PostSubscriptionPayload!
+  userPosts: PostSubscriptionPayload!
+}
+
+input CreateUserInput {
+  name: String!
+  email: String!
+  password: String!
+}
+
+input UpdateUserInput {
+  name: String
+  email: String
+  password: String
+}
+
+input LoginInput {
+  email: String!
+  password: String!
+}
+
+input CreatePostInput {
+  title: String!
+  body: String!
+  published: Boolean!
+}
+
+input UpdatePostInput {
+  title: String
+  body: String
+  published: Boolean
+}
+
+input CreateCommentInput {
+  text: String!
+  post: ID!
+}
+
+input UpdateCommentInput {
+  text: String
+}
+
+type User {
+  id: ID!
+  name: String!
+  email: String
+  password: String!
+  posts: [Post!]!
+  comments: [Comment!]!
+  updatedAt: String!
+  createdAt: String!
+}
+
+type AuthPayload {
+  user: User!
+  token: String!
+}
+
+type Post {
+  id: ID!
+  author: User!
+  title: String!
+  body: String!
+  published: Boolean!
+  comments: [Comment!]!
+  updatedAt: String!
+  createdAt: String!
+}
+
+type Comment {
+  id: ID!
+  text: String!
+  author: User!
+  post: Post!
+  updatedAt: String!
+  createdAt: String!
+}
+
+enum MutationType {
+  CREATED
+  UPDATED
+  DELETED
+}
+
+type PostSubscriptionPayload {
+  mutation: MutationType!
+  node: Post
+}
+
+type CommentSubscriptionPayload {
+  mutation: MutationType!
+  node: Comment
+}

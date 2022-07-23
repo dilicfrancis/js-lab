@@ -1,0 +1,12 @@
+version: "3"
+services:
+  redis-server:
+    image: "redis"
+  node-app:
+    restart: on-failure #always #"no" policy requires quotes
+    build: .
+    ports:
+      - "8081:8081" # - stands for arrays (space after dash is required)
+
+#services or containers defined in the same yml
+#file automatically share the same network

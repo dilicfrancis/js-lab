@@ -1,0 +1,14 @@
+apiVersion: cert-manager.io/v1
+
+kind: Certificate
+metadata:
+  name: afterlico-org-tls
+spec:
+  secretName: afterlico-org
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  commonName: afterlico.org
+  dnsNames:
+    - afterlico.org
+    - www.afterlico.org

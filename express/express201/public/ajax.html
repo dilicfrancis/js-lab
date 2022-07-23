@@ -1,0 +1,14 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<script>
+  const request = $.ajax({
+    method: "POST",
+    url: "http://localhost:3000/ajax",
+    dataType: "json",
+    data: {
+      name: "Tito",
+    },
+  })
+    .then((res, b, c) => console.log(res))
+    .catch((res) => console.log("error: " + res));
+</script>

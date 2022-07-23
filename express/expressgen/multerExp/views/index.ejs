@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+  </head>
+  <body>
+    <form method="post" action="/form" enctype="multipart/form-data">
+      <input type="text" placeholder="filename" name="desc" />
+      <input type="file" name="meme" />
+    </form>
+    <form method="post" action="/memes" enctype="multipart/form-data">
+      <input type="text" placeholder="filename" name="desc" />
+      <input type="file" name="memes" />
+    </form>
+  </body>
+</html>
