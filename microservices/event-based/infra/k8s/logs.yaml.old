@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: logs
+spec:
+  containers:
+    - name: logs
+      image: dilicfrancis/logs:0.0.1

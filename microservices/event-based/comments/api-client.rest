@@ -1,0 +1,18 @@
+### Add a comment to a post id
+POST http://localhost:3002/posts/63/comments
+Content-Type: application/json
+
+{
+    "content": "This is awesome!"
+}
+
+### Fetch comments by with id 63
+GET http://localhost:3002/posts/63/comments 
+
+### Another comment to post id 63 ensure previous is not overwritten
+POST http://localhost:3002/posts/63/comments
+Content-Type: application/json
+
+{
+    "content": "Still awesome!"
+}

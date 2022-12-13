@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: events-depl
+spec:
+  selector:
+    matchLabels:
+      app: events
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: events
+    spec:
+      containers:
+        - name: events
+          image: dilicfrancis/events
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: events-srv
+spec:
+  selector:
+    app: events
+  ports:
+    - name: events-http
+      protocol: TCP
+      port: 3008
+      targetPort: 3008

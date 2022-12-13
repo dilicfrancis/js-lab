@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: comments-depl
+spec:
+  selector:
+    matchLabels:
+      app: comments
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: comments
+    spec:
+      containers:
+        - name: comments
+          image: dilicfrancis/comments
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: comments-srv
+spec:
+  selector:
+    app: comments
+  ports:
+    - name: comments-http
+      protocol: TCP
+      port: 3002
+      targetPort: 3002

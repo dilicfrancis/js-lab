@@ -1,0 +1,34 @@
+### Get request
+GET http://localhost:3001/logs
+
+### Post with a body
+POST http://localhost:3001/logs/new
+Content-Type: application/json
+
+{
+    "title": "Jillio"
+}
+
+#K8S
+
+###
+GET http://localhost:30783/logs 
+
+### Post with a body
+POST http://localhost:30783/logs/new
+Content-Type: application/json
+
+{
+    "title": "Jillio"
+}
+
+###
+GET http://logs.com/logs 
+
+### Post with a body
+POST http://logs.com/logs/new
+Content-Type: application/json
+
+{
+    "title": "Jillio"
+}
